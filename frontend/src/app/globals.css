@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens.
+ *   Paper  – cool off-white page, white surfaces
+ *   Ink    – blue-black text
+ *   Teal   – the single brand colour; it also marks anything that is *memory*
+ *            (citation chips, recalled decisions), so it stays meaningful.
+ *   Green / amber – outcome recorded / needs attention (status only).
+ */
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 215 28% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 14%;
+    --primary: 196 62% 26%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 18% 93%;
+    --secondary-foreground: 215 28% 20%;
+    --muted: 210 18% 94%;
+    --muted-foreground: 215 14% 38%;
+    --accent: 196 40% 92%;
+    --accent-foreground: 196 62% 20%;
+    --destructive: 0 66% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 48% 24%;
+    --success-soft: 152 40% 91%;
+    --warning: 30 90% 28%;
+    --warning-soft: 42 92% 91%;
+    --border: 214 16% 86%;
+    --input: 214 14% 74%;
+    --ring: 196 62% 34%;
+    --radius: 0.375rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  a:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Long-form reading surface for briefings (rendered markdown). */
+@layer components {
+  .briefing-prose {
+    @apply max-w-[72ch] text-[15px] leading-[1.7] text-foreground;
+  }
+  .briefing-prose > :first-child { @apply mt-0; }
+  .briefing-prose h1,
+  .briefing-prose h2 { @apply mb-2 mt-8 text-lg font-semibold tracking-tight; }
+  .briefing-prose h3,
+  .briefing-prose h4 { @apply mb-1.5 mt-6 text-[15px] font-semibold; }
+  .briefing-prose p { @apply mb-3; }
+  .briefing-prose ul { @apply mb-3 list-disc space-y-1.5 pl-5; }
+  .briefing-prose ol { @apply mb-3 list-decimal space-y-1.5 pl-5; }
+  .briefing-prose strong { @apply font-semibold; }
+  .briefing-prose blockquote { @apply mb-3 border-l-2 border-primary/30 pl-4 text-muted-foreground; }
+  .briefing-prose hr { @apply my-6; }
+  .briefing-prose code { @apply rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]; }
+  .briefing-prose a { @apply text-primary underline underline-offset-2; }
+  .briefing-prose table { @apply mb-4 block w-full overflow-x-auto text-sm; }
+  .briefing-prose th { @apply border-b px-3 py-2 text-left font-semibold; }
+  .briefing-prose td { @apply border-b px-3 py-2 align-top; }
+}
